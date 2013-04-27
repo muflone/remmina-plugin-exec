@@ -1,5 +1,5 @@
-remmina-plugin-exec
-A Remmina plugin to execute an external process.
+Project name : Remmina Plugin EXEC
+Remmina protocol plugin to execute an external process.
 
 Copyright (C) 2011-2012 Fabio Castelli <muflone@vbsimple.net>
 
