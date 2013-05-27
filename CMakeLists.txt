@@ -1,7 +1,7 @@
-# Project name : Remmina Plugin WEBKIT
-# Remmina protocol plugin to launch a GTK+ Webkit browser.
+# Project name : Remmina Plugin EXEC
+# Remmina protocol plugin to execute an external process.
 #
-# Copyright (C) 2012-2013 Fabio Castelli <muflone@vbsimple.net>
+# Copyright (C) 2011-2013 Fabio Castelli <muflone@vbsimple.net>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
