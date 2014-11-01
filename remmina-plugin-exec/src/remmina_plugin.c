@@ -1,81 +1,35 @@
 /*
- * Project name : Remmina Plugin EXEC
- * Remmina protocol plugin to execute an external process.
- * Copyright (C) 2011-2013 Fabio Castelli <muflone@vbsimple.net>
+ *     Project: Remmina Plugin EXEC
+ * Description: Remmina protocol plugin to execute an external process.
+ *      Author: Fabio Castelli (Muflone) <muflone@vbsimple.net>
+ *   Copyright: 2011-2014 Fabio Castelli (Muflone)
+ *     License: GPL-2+
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of ERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "config.h"
 #include "plugin_config.h"
-#include <gtk/gtk.h>
-#include <glib/gi18n-lib.h>
-#include <pthread.h>
-#include <remmina/plugin.h>
+#include <remmina/remmina_plugin.h>
 #if GTK_VERSION == 3
   # include <gtk/gtkx.h>
 #endif
 
-typedef struct _RemminaPluginData
-{
-  GtkWidget *socket;
-  gint socket_id;
-  GPid pid;
-  gchar **output_fd;
-  gchar **error_fd;
-  gint display;
-  gboolean ready;
-  gint *exit_status;
-
-#ifdef HAVE_PTHREAD
-  pthread_t thread;
-#else
-  gint thread;
-#endif
-} RemminaPluginData;
-
 static RemminaPluginService *remmina_plugin_service = NULL;
-
-static void remmina_plugin_on_plug_added(GtkSocket *socket, RemminaProtocolWidget *gp)
-{
-  RemminaPluginData *gpdata;
-  gpdata = (RemminaPluginData*) g_object_get_data(G_OBJECT(gp), "plugin-data");
-  remmina_plugin_service->log_printf("[%s] remmina_plugin_on_plug_added socket %d\n", PLUGIN_NAME, gpdata->socket_id);
-  remmina_plugin_service->protocol_plugin_emit_signal(gp, "connect");
-  return;
-}
-
-static void remmina_plugin_on_plug_removed(GtkSocket *socket, RemminaProtocolWidget *gp)
-{
-  remmina_plugin_service->log_printf("[%s] remmina_plugin_on_plug_removed\n", PLUGIN_NAME);
-  remmina_plugin_service->protocol_plugin_close_connection(gp);
-}
 
 static void remmina_plugin_init(RemminaProtocolWidget *gp)
 {
   remmina_plugin_service->log_printf("[%s] remmina_plugin_init\n", PLUGIN_NAME);
-  RemminaPluginData *gpdata;
-
-  gpdata = g_new0(RemminaPluginData, 1);
-  g_object_set_data_full(G_OBJECT(gp), "plugin-data", gpdata, g_free);
-
-  gpdata->socket = gtk_socket_new();
-  remmina_plugin_service->protocol_plugin_register_hostkey(gp, gpdata->socket);
-  gtk_widget_show(gpdata->socket);
-  g_signal_connect(G_OBJECT(gpdata->socket), "plug-added", G_CALLBACK(remmina_plugin_on_plug_added), gp);
-  g_signal_connect(G_OBJECT(gpdata->socket), "plug-removed", G_CALLBACK(remmina_plugin_on_plug_removed), gp);
-  gtk_container_add(GTK_CONTAINER(gp), gpdata->socket);
 }
 
 static gboolean remmina_plugin_open_connection(RemminaProtocolWidget *gp)
@@ -90,20 +44,20 @@ static gboolean remmina_plugin_open_connection(RemminaProtocolWidget *gp)
   #define GET_PLUGIN_PASSWORD(value) \
     g_strdup(remmina_plugin_service->file_get_secret(remminafile, value));
 
-  RemminaPluginData *gpdata;
   RemminaFile *remminafile;
   gboolean ret;
   GError *error = NULL;
+  gchar **output_fd;
+  gchar **error_fd;
+  gint *exit_status;
 
-  gpdata = (RemminaPluginData*) g_object_get_data(G_OBJECT(gp), "plugin-data");
   remminafile = remmina_plugin_service->protocol_plugin_get_file(gp);
 
   if (GET_PLUGIN_BOOLEAN("synchronous"))
     ret = g_spawn_command_line_sync(GET_PLUGIN_STRING("server"),
-      gpdata->output_fd, gpdata->error_fd, gpdata->exit_status, &error);
+      output_fd, error_fd, exit_status, &error);
   else
-    ret = g_spawn_command_line_async(GET_PLUGIN_STRING("server"), 
-      &error);
+    ret = g_spawn_command_line_async(GET_PLUGIN_STRING("server"), &error);
 
   if (!ret)
     remmina_plugin_service->protocol_plugin_set_error(gp, "%s", error->message);
@@ -116,18 +70,6 @@ static gboolean remmina_plugin_close_connection(RemminaProtocolWidget *gp)
   remmina_plugin_service->log_printf("[%s] remmina_plugin_close_connection\n", PLUGIN_NAME);
   remmina_plugin_service->protocol_plugin_emit_signal(gp, "disconnect");
   return FALSE;
-}
-
-static gboolean remmina_plugin_query_feature(RemminaProtocolWidget *gp, const RemminaProtocolFeature *feature)
-{
-  remmina_plugin_service->log_printf("[%s] remmina_plugin_query_feature\n", PLUGIN_NAME);
-  return FALSE;
-}
-
-static void remmina_plugin_call_feature(RemminaProtocolWidget *gp, const RemminaProtocolFeature *feature)
-{
-  remmina_plugin_service->log_printf("[%s] remmina_plugin_call_feature\n", PLUGIN_NAME);
-  return;
 }
 
 static const RemminaProtocolSetting remmina_plugin_basic_settings[] =
@@ -153,8 +95,8 @@ static RemminaProtocolPlugin remmina_plugin =
   remmina_plugin_init,
   remmina_plugin_open_connection,
   remmina_plugin_close_connection,
-  remmina_plugin_query_feature,
-  remmina_plugin_call_feature
+  NULL,
+  NULL
 };
 
 G_MODULE_EXPORT gboolean remmina_plugin_entry(RemminaPluginService *service)
