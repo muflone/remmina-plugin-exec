@@ -2,7 +2,7 @@
  *     Project: Remmina Plugin EXEC
  * Description: Remmina protocol plugin to execute an external process.
  *      Author: Fabio Castelli (Muflone) <muflone@vbsimple.net>
- *   Copyright: 2011-2014 Fabio Castelli (Muflone)
+ *   Copyright: 2011-2016 Fabio Castelli (Muflone)
  *     License: GPL-2+
  *
  * This program is free software; you can redistribute it and/or modify
