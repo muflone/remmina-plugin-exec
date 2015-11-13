@@ -47,9 +47,9 @@ static gboolean remmina_plugin_open_connection(RemminaProtocolWidget *gp)
   RemminaFile *remminafile;
   gboolean ret;
   GError *error = NULL;
-  gchar **output_fd;
-  gchar **error_fd;
-  gint *exit_status;
+  gchar **output_fd = NULL;
+  gchar **error_fd = NULL;
+  gint *exit_status = NULL;
 
   remminafile = remmina_plugin_service->protocol_plugin_get_file(gp);
 
