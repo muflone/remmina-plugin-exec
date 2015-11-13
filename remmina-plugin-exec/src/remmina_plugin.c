@@ -27,12 +27,12 @@
 
 static RemminaPluginService *remmina_plugin_service = NULL;
 
-static void remmina_plugin_init(RemminaProtocolWidget *gp)
+static void remmina_plugin_exec_init(RemminaProtocolWidget *gp)
 {
   remmina_plugin_service->log_printf("[%s] remmina_plugin_init\n", PLUGIN_NAME);
 }
 
-static gboolean remmina_plugin_open_connection(RemminaProtocolWidget *gp)
+static gboolean remmina_plugin_exec_open_connection(RemminaProtocolWidget *gp)
 {
   remmina_plugin_service->log_printf("[%s] remmina_plugin_open_connection\n", PLUGIN_NAME);
   #define GET_PLUGIN_STRING(value) \
@@ -61,7 +61,7 @@ static gboolean remmina_plugin_open_connection(RemminaProtocolWidget *gp)
   return FALSE;
 }
 
-static gboolean remmina_plugin_close_connection(RemminaProtocolWidget *gp)
+static gboolean remmina_plugin_exec_close_connection(RemminaProtocolWidget *gp)
 {
   remmina_plugin_service->log_printf("[%s] remmina_plugin_close_connection\n", PLUGIN_NAME);
   remmina_plugin_service->protocol_plugin_emit_signal(gp, "disconnect");
@@ -77,7 +77,7 @@ static gboolean remmina_plugin_close_connection(RemminaProtocolWidget *gp)
  * e) Values for REMMINA_PROTOCOL_SETTING_TYPE_SELECT or REMMINA_PROTOCOL_SETTING_TYPE_COMBO
  * f) Unused pointer
  */
-static const RemminaProtocolSetting remmina_plugin_basic_settings[] =
+static const RemminaProtocolSetting remmina_plugin_exec_basic_settings[] =
 {
   { REMMINA_PROTOCOL_SETTING_TYPE_TEXT, "server", N_("Startup program"), FALSE, NULL, NULL },
   { REMMINA_PROTOCOL_SETTING_TYPE_CHECK, "synchronous", N_("Synchronous open"), TRUE, NULL, NULL },
@@ -94,13 +94,13 @@ static RemminaProtocolPlugin remmina_plugin =
   PLUGIN_VERSION,                               // Version number
   PLUGIN_APPICON,                               // Icon for normal connection
   PLUGIN_APPICON,                               // Icon for SSH connection
-  remmina_plugin_basic_settings,                // Array for basic settings
+  remmina_plugin_exec_basic_settings,           // Array for basic settings
   NULL,                                         // Array for advanced settings
   REMMINA_PROTOCOL_SSH_SETTING_NONE,            // SSH settings type
   NULL,                                         // Array for available features
-  remmina_plugin_init,                          // Plugin initialization
-  remmina_plugin_open_connection,               // Plugin open connection
-  remmina_plugin_close_connection,              // Plugin close connection
+  remmina_plugin_exec_init,                     // Plugin initialization
+  remmina_plugin_exec_open_connection,          // Plugin open connection
+  remmina_plugin_exec_close_connection,         // Plugin close connection
   NULL,                                         // Query for available features
   NULL,                                         // Call a feature
   NULL                                          // Send a keystroke
