@@ -1,23 +1,23 @@
-    Project: Remmina Plugin EXEC 
-Description: Remmina protocol plugin to execute an external process.
-     Author: Fabio Castelli (Muflone) <muflone@vbsimple.net>
-  Copyright: 2011-2016 Fabio Castelli (Muflone)
-    License: GPL-2+
+**Project**: Remmina Plugin EXEC 
 
-     Status: [![Build Status](https://travis-ci.org/muflone/remmina-plugin-exec.svg?branch=master)](https://travis-ci.org/muflone/remmina-plugin-exec)
+**Description**: Remmina protocol plugin to execute an external process.
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
+**Author**: Fabio Castelli (Muflone) <muflone@vbsimple.net>
 
-This program is distributed in the hope that it will be useful, but WITHOUT
-ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-more details.
+**Home page**: http://www.muflone.com/remmina-plugin-exec/
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+**Copyright**: 2011-2016 Fabio Castelli (Muflone)
+
+**License**: GPL-2+
+
+**Status**: [![Build Status](https://travis-ci.org/muflone/remmina-plugin-exec.svg?branch=master)](https://travis-ci.org/muflone/remmina-plugin-exec)
+
+## Description
+
+A [**Remmina**](https://github.com/freerdp/remmina) protocol plugin to execute
+external processes from a Remmina connection.
+
+![Main window](http://www.muflone.com/resources/remmina-plugin-exec/archive/latest/english/general.png)
 
 ## Install instructions
 
@@ -42,3 +42,18 @@ access):
     sudo make install
 
 You'll find it in the remmina connection editor.
+
+## License
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
