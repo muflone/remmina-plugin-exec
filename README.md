@@ -1,4 +1,4 @@
-    Project: Remmina Plugin EXEC
+    Project: Remmina Plugin EXEC 
 Description: Remmina protocol plugin to execute an external process.
      Author: Fabio Castelli (Muflone) <muflone@vbsimple.net>
   Copyright: 2011-2016 Fabio Castelli (Muflone)
