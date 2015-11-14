@@ -3,6 +3,7 @@ Description: Remmina protocol plugin to execute an external process.
      Author: Fabio Castelli (Muflone) <muflone@vbsimple.net>
   Copyright: 2011-2016 Fabio Castelli (Muflone)
     License: GPL-2+
+     Status: [![Build Status](https://travis-ci.org/muflone/remmina-plugin-exec.svg?branch=master)](https://travis-ci.org/muflone/remmina-plugin-exec)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
