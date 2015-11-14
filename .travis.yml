@@ -14,7 +14,7 @@ install:
   - wget --output-document=remmina-plugin-builder.tar.gz
     https://github.com/muflone/remmina-plugin-builder/archive/1.2.0.0.tar.gz
   - tar --extract --verbose --gzip --file remmina-plugin-builder.tar.gz
-  - cp --verbose --recursive remmina-plugin-exec/* CMakeLists.txt
+  - cp --verbose --recursive remmina-plugin-exec CMakeLists.txt
     remmina-plugin-builder-1.2.0.0/remmina-plugin-to-build/
 script:
   - echo script
