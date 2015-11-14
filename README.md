@@ -1,4 +1,4 @@
-# Remmina Plugin EXEC 
+# Remmina Plugin EXEC
 
 **Author**: Fabio Castelli (Muflone) <muflone@vbsimple.net>
 
