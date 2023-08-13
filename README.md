@@ -1,10 +1,10 @@
 # Remmina Plugin EXEC
 
-**Author**: Fabio Castelli (Muflone) <muflone@vbsimple.net>
+**Author**: Fabio Castelli (Muflone) <muflone@muflone.com>
 
 **Home page**: http://www.muflone.com/remmina-plugin-exec/
 
-**Copyright**: 2011-2016 Fabio Castelli (Muflone)
+**Copyright**: 2011-2023 Fabio Castelli (Muflone)
 
 **License**: GPL-2+
 
