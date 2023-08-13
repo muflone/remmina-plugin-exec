@@ -24,6 +24,6 @@
 
   #define PLUGIN_NAME        "EXEC"
   #define PLUGIN_DESCRIPTION "EXEC - Execute an external process"
-  #define PLUGIN_VERSION     "1.2.3.0"
+  #define PLUGIN_VERSION     "1.4.31.0"
   #define PLUGIN_APPICON     "remmina-exec"
 #endif
