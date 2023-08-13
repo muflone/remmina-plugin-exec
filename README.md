@@ -10,6 +10,11 @@
 
 **Status**: [![Build Status](https://travis-ci.org/muflone/remmina-plugin-exec.svg?branch=master)](https://travis-ci.org/muflone/remmina-plugin-exec)
 
+## Project Archived
+
+Remmina Plugin Exec is already included in Remmina code, so this plugin is
+not needed anymore.
+
 ## Description
 
 A [**Remmina**](https://github.com/freerdp/remmina) protocol plugin to execute
